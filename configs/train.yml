@@ -66,6 +66,6 @@ TEST:
   NECK_FEAT: 'before'
   FEAT_NORM: 'no'
 
-OUTPUT_DIR: '/home/aistudio/work/JL_GCN/log/test'
+OUTPUT_DIR: '/home/aistudio/work/JL-GCN/log/test'
 
 
