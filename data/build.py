@@ -66,7 +66,7 @@ def make_data_loader(cfg):
 
 def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
     #准备有标签样本的Feeder
-    #sadasd
+    #sadasdas
     model.eval()
     feat = []
     label = []

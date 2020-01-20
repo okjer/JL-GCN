@@ -1,0 +1,73 @@
+MODEL:
+  PRETRAIN_CHOICE: 'imagenet'
+  PRETRAIN_PATH: '/home/aistudio/data/data19873/data/resnet50-19c8e357.pth'
+  METRIC_LOSS_TYPE: 'triplet_center'
+  IF_LABELSMOOTH: 'on'
+  IF_WITH_CENTER: 'yes'
+
+  
+
+INPUT:
+  SIZE_TRAIN: [288, 144]
+  SIZE_TEST: [288, 144]
+  PROB: 0.5 # random horizontal flip
+  RE_PROB: 0.0 # random erasing
+  PADDING: 10
+  CLUSTER_NUMBER: 500
+
+DATASETS:
+  NAMES: ('market1501')
+  NAMES2: ('dukemtmc')
+  ROOT_DIR: ('/home/aistudio/data/data19873/data')
+  ROOT_DIR2: ('/home/aistudio/data/data19873/data')
+
+DATALOADER:
+  SAMPLER: 'softmax_triplet'
+  SAMPLER2: 'softmax'
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 0
+
+SOLVER:
+  OPTIMIZER_NAME: 'Adam'
+  MAX_EPOCHS: 150
+  MY_START_EPOCH: 60 #here
+  BASE_LR: 0.00035
+
+  CLUSTER_MARGIN: 0.3
+
+  CENTER_LR: 0.5
+  CENTER_LOSS_WEIGHT: 0.0005
+  CLUSTER_LOSS_WEIGHT: 50.0 #here
+
+  RANGE_K: 2
+  RANGE_MARGIN: 0.3
+  RANGE_ALPHA: 0
+  RANGE_BETA: 1
+  RANGE_LOSS_WEIGHT: 1
+
+  BIAS_LR_FACTOR: 1
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0.0005
+  IMS_PER_BATCH: 64
+
+  STEPS: [40, 70]
+  GAMMA: 0.1
+
+  WARMUP_FACTOR: 0.01
+  WARMUP_ITERS: 10
+  WARMUP_METHOD: 'linear'
+
+  CHECKPOINT_PERIOD: 30
+  LOG_PERIOD: 20
+  EVAL_PERIOD: 30
+
+TEST:
+  IMS_PER_BATCH: 128
+  RE_RANKING: 'yes'
+  WEIGHT: "/home/aistudio/work/CDDA/log/Mar2D_CDL/resnet50_model_120.pth"
+  NECK_FEAT: 'before'
+  FEAT_NORM: 'no'
+
+OUTPUT_DIR: '/home/aistudio/work/JL_GCN/log/test'
+
+
