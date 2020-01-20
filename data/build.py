@@ -17,7 +17,7 @@ import numpy as np
 from gcn_clustering import Feeder,gcn
 import logging
 
-lr = 1e-2
+global lr = 1e-2
 
 def make_data_loader(cfg):
     torch.manual_seed(0)
@@ -83,22 +83,21 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         with torch.no_grad():
             for i,(imgs,pids,camids,fileNames) in enumerate(src_train_loader):
                 outputs = model(imgs)
-                feat.extend(outputs.cpu())
+                feat.extend(outputs)
                 label.extend(pids.numpy())
                 print(i)
         label = np.array(label)
         N = len(feat)
         D = feat[0].size()[0]
-        feat = torch.cat([f.view(1,D) for f in feat],0).numpy()
+        feat = torch.cat([f.view(1,D) for f in feat],0)
         
-        distmat = np.power(
-            cdist(feat, feat), 2).astype(np.float16)
+        #distmat = np.power(
+        #    cdist(feat, feat), 2).astype(np.float16)
 
-        #distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
-        #            torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
-        #distmat.addmm_(1, -2, feat, feat.t())
-        knn_graph = np.argsort(distmat,axis = 1)[:,:k_at_hop[0]+1]
-
+        distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
+                    torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
+        distmat.addmm_(1, -2, feat, feat.t())
+        knn_graph = torch.argsort(distmat,dim = 1).cpu().numpy()[:,:k_at_hop[0]+1]
         
 
         np.save(feat_path,feat)
