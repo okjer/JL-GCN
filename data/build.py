@@ -17,6 +17,7 @@ import numpy as np
 from gcn_clustering import Feeder,gcn
 import logging
 
+lr = 1e-2
 
 def make_data_loader(cfg):
     torch.manual_seed(0)
@@ -116,7 +117,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
             num_workers=cfg.DATALOADER.NUM_WORKERS, shuffle=True, pin_memory=True) 
 
     net = gcn().cuda()
-    opt = torch.optim.SGD(net.parameters(), 1e-2, 
+    opt = torch.optim.SGD(net.parameters(), lr, 
                           momentum=0.9, 
                           weight_decay=1e-4) 
 
@@ -158,7 +159,7 @@ def train(loader, net, crit, opt, epoch):
     
         batch_time.update(time.time()- end)
         end = time.time()
-        if i % args.print_freq == 0:
+        if i % 20 == 0:
             logger.info('Epoch:[{0}][{1}/{2}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                   'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
@@ -172,10 +173,10 @@ def train(loader, net, crit, opt, epoch):
 
 def adjust_lr(opt, epoch):
     scale = 0.1
-    print('Current lr {}'.format(args.lr))
+    print('Current lr {}'.format(lr))
     if epoch in [1,2,3,4]:
-        args.lr *=0.1
-        print('Change lr to {}'.format(args.lr))
+        lr *=0.1
+        print('Change lr to {}'.format(lr))
         for param_group in opt.param_groups:
             param_group['lr'] = param_group['lr'] * scale
     
