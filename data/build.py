@@ -17,7 +17,6 @@ import numpy as np
 from gcn_clustering import Feeder,gcn
 import logging
 
-global lr
 
 def make_data_loader(cfg):
     torch.manual_seed(0)
@@ -123,11 +122,11 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
 
     criterion = nn.CrossEntropyLoss().cuda()
     for epoch in range(4):
-        adjust_lr(opt, epoch)
-        train(trainloader, net, criterion, opt, epoch)
+        adjust_lr(opt, epoch,lr)
+        train(trainloader, net, criterion, opt, epoch,lr)
     return trainset
 
-def train(loader, net, crit, opt, epoch):
+def train(loader, net, crit, opt, epoch,lr):
     logger = logging.getLogger("reid_baseline.train")
     logger.info("Start training")
     batch_time = AverageMeter()
@@ -171,7 +170,7 @@ def train(loader, net, crit, opt, epoch):
                         data_time=data_time, losses=losses, accs=accs, 
                         precisions=precisions, recalls=recalls))
 
-def adjust_lr(opt, epoch):
+def adjust_lr(opt, epoch,lr):
     scale = 0.1
     print('Current lr {}'.format(lr))
     if epoch in [1,2,3,4]:
