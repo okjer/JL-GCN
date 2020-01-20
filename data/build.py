@@ -17,7 +17,7 @@ import numpy as np
 from gcn_clustering import Feeder,gcn
 import logging
 
-global lr = 1e-2
+global lr
 
 def make_data_loader(cfg):
     torch.manual_seed(0)
@@ -67,6 +67,7 @@ def make_data_loader(cfg):
     return src_train_loader, src_val_loader, src_num_query, src_num_classes,tar_train_loader,tar_val_loader,daDataset
 
 def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
+    lr = 1e-2
     feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
     knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
     label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
