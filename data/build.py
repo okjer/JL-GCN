@@ -16,6 +16,7 @@ from scipy.spatial.distance import cdist
 import numpy as np
 from gcn_clustering import Feeder,gcn,AverageMeter
 import logging
+import time
 
 
 def make_data_loader(cfg):
