@@ -17,6 +17,7 @@ import numpy as np
 from gcn_clustering import Feeder,gcn,AverageMeter
 import logging
 import time
+from sklearn.metrics import precision_score, recall_score
 
 
 def make_data_loader(cfg):
