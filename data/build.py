@@ -66,6 +66,9 @@ def make_data_loader(cfg):
     return src_train_loader, src_val_loader, src_num_query, src_num_classes,tar_train_loader,tar_val_loader,daDataset
 
 def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
+    feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
+    knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
+    label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
     if False:
         #准备有标签样本的Feeder
         #sadasdas
@@ -96,15 +99,13 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         k_at_hop = cfg.GCN.K_AT_HOP
         knn_graph = np.argsort(distmat,axis = 1)[:,:k_at_hop[0]+1]
 
-        feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
-        knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
-        label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
+        
 
         np.save(feat_path,feat)
         np.save(knn_graph_path,knn_graph)
         np.save(label_path,label)
         del feat,knn_graph,label,distmat
-            
+
     del model
     trainset = Feeder(feat_path, 
                       knn_graph_path, 
