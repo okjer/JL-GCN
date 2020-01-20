@@ -14,7 +14,7 @@ import torch
 import torch.nn as nn
 from scipy.spatial.distance import cdist
 import numpy as np
-from gcn_clustering import Feeder,gcn
+from gcn_clustering import Feeder,gcn,AverageMeter
 import logging
 
 
