@@ -66,46 +66,47 @@ def make_data_loader(cfg):
     return src_train_loader, src_val_loader, src_num_query, src_num_classes,tar_train_loader,tar_val_loader,daDataset
 
 def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
-    #准备有标签样本的Feeder
-    #sadasdas
-    model.eval()
-    model = nn.DataParallel(model)
-    model.cuda()
-    feat = []
-    label = []
-    print(len(src_train_loader))
-    with torch.no_grad():
-        for i,(imgs,pids,camids,fileNames) in enumerate(src_train_loader):
-            outputs = model(imgs)
-            feat.extend(outputs.cpu())
-            label.extend(pids.numpy())
-            print(i)
-    label = np.array(label)
-    N = len(feat)
-    D = feat[0].size()[0]
-    feat = torch.cat([f.view(1,D) for f in feat],0).numpy()
-    
-    distmat = np.power(
-        cdist(feat, feat), 2).astype(np.float16)
+    if False:
+        #准备有标签样本的Feeder
+        #sadasdas
+        model.eval()
+        model = nn.DataParallel(model)
+        model.cuda()
+        feat = []
+        label = []
+        print(len(src_train_loader))
+        with torch.no_grad():
+            for i,(imgs,pids,camids,fileNames) in enumerate(src_train_loader):
+                outputs = model(imgs)
+                feat.extend(outputs.cpu())
+                label.extend(pids.numpy())
+                print(i)
+        label = np.array(label)
+        N = len(feat)
+        D = feat[0].size()[0]
+        feat = torch.cat([f.view(1,D) for f in feat],0).numpy()
+        
+        distmat = np.power(
+            cdist(feat, feat), 2).astype(np.float16)
 
-    #distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
-    #            torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
-    #distmat.addmm_(1, -2, feat, feat.t())
+        #distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
+        #            torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
+        #distmat.addmm_(1, -2, feat, feat.t())
 
-    k_at_hop = cfg.GCN.K_AT_HOP
-    knn_graph = np.argsort(distmat,axis = 1)[:,:k_at_hop[0]+1]
+        k_at_hop = cfg.GCN.K_AT_HOP
+        knn_graph = np.argsort(distmat,axis = 1)[:,:k_at_hop[0]+1]
 
-    feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
-    knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
-    label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
+        feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
+        knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
+        label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
 
-    np.save(feat_path,feat)
-    np.save(knn_graph_path,knn_graph)
-    np.save(label_path,label)
-
-    del feat,knn_graph,label,distmat
+        np.save(feat_path,feat)
+        np.save(knn_graph_path,knn_graph)
+        np.save(label_path,label)
+        del feat,knn_graph,label,distmat
+            
     del model
-    trainset = Feeder(args.feat_path, 
+    trainset = Feeder(feat_path, 
                       knn_graph_path, 
                       label_path, 
                       k_at_hop)
