@@ -183,8 +183,8 @@ def adjust_lr(opt, epoch,lr):
 def accuracy(pred, label):
     pred = torch.argmax(pred, dim=1).long()
     acc = torch.mean((pred == label).float())
-    pred = pred.numpy()
-    label = label.numpy()
+    pred = pred.cpu().numpy()
+    label = label.cpu().numpy()
     p = precision_score(label, pred)
     r = recall_score(label, pred)
     return p,r,acc 
