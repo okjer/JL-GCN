@@ -103,6 +103,8 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
     np.save(knn_graph_path,knn_graph)
     np.save(label_path,label)
 
+    del feat,knn_graph,label,distmat
+    del model
     trainset = Feeder(args.feat_path, 
                       knn_graph_path, 
                       label_path, 
