@@ -69,6 +69,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
     feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
     knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
     label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
+    k_at_hop = cfg.GCN.K_AT_HOP
     if False:
         #准备有标签样本的Feeder
         #sadasdas
@@ -95,8 +96,6 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         #distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
         #            torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
         #distmat.addmm_(1, -2, feat, feat.t())
-
-        k_at_hop = cfg.GCN.K_AT_HOP
         knn_graph = np.argsort(distmat,axis = 1)[:,:k_at_hop[0]+1]
 
         
