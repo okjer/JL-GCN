@@ -78,8 +78,8 @@ _C.DATASETS.NAME1 = ('market1501')
 _C.DATASETS.NAME2 = ('dukemtmc')
 _C.DATASETS.CamNum1 = 6
 # Root directory where datasets should be used (and downloaded if not found)
-_C.DATASETS.ROOT_DIR1 = ('./data')
-_C.DATASETS.ROOT_DIR2 = ('./data')
+_C.DATASETS.ROOT_DIR1 = ('../../.././')
+_C.DATASETS.ROOT_DIR2 = ('../../.././')
 _C.DATASETS.CamNum2 = 8
 # -----------------------------------------------------------------------------
 # DataLoader

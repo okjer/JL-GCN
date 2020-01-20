@@ -11,6 +11,7 @@ from .datasets import init_dataset, ImageDataset,DADataset
 from .transforms import build_transforms
 import os.path as osp
 import torch
+import torch.nn as nn
 from scipy.spatial.distance import cdist
 import numpy as np
 from gcn_clustering import Feeder,gcn
@@ -68,13 +69,13 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
     #准备有标签样本的Feeder
     #sadasdas
     model.eval()
+    model = nn.DataParallel(model)
     model.cuda()
     feat = []
     label = []
     print(len(src_train_loader))
     with torch.no_grad():
-        for i,(imgs,pids,camids,fileNames) in enumerate(src_train_loader):
-            imgs.cuda()
+        for i,(imgs,pids,camids,fileNames) in enumerate(src_train_loader):s
             outputs = model(imgs)
             feat.extend(outputs)
             label.extend(pids.numpy())

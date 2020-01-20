@@ -1,6 +1,6 @@
-2020-01-20 18:19:41,298 reid_baseline INFO: Using 1 GPUS
-2020-01-20 18:19:41,299 reid_baseline INFO: Namespace(config_file='', opts=[])
-2020-01-20 18:19:41,300 reid_baseline INFO: Running with config:
+2020-01-20 19:50:25,989 reid_baseline INFO: Using 1 GPUS
+2020-01-20 19:50:25,990 reid_baseline INFO: Namespace(config_file='', opts=[])
+2020-01-20 19:50:25,991 reid_baseline INFO: Running with config:
 DATALOADER:
   NUM_INSTANCE: 2
   NUM_WORKERS: 0
@@ -11,8 +11,8 @@ DATASETS:
   CamNum2: 8
   NAME1: market1501
   NAME2: dukemtmc
-  ROOT_DIR1: ./data
-  ROOT_DIR2: ./data
+  ROOT_DIR1: ../../.././
+  ROOT_DIR2: ../../.././
 GCN:
   K_AT_HOP: [200, 5]
 INPUT:
