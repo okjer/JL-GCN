@@ -188,3 +188,6 @@ def accuracy(pred, label):
     p = precision_score(label, pred)
     r = recall_score(label, pred)
     return p,r,acc 
+    
+def make_labels(gtmat):
+    return gtmat.view(-1)
