@@ -183,11 +183,11 @@ def adjust_lr(opt, epoch,lr):
 def accuracy(pred, label):
     pred = torch.argmax(pred, dim=1).long()
     acc = torch.mean((pred == label).float())
-    pred = to_numpy(pred)
-    label = to_numpy(label)
+    pred = pred.numpy()
+    label = label.numpy()
     p = precision_score(label, pred)
     r = recall_score(label, pred)
     return p,r,acc 
-    
+
 def make_labels(gtmat):
     return gtmat.view(-1)
