@@ -74,6 +74,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
     print(len(src_train_loader))
     with torch.no_grad():
         for i,(imgs,pids,camids,fileNames) in enumerate(src_train_loader):
+            imgs.cuda()
             outputs = model(imgs)
             feat.extend(outputs)
             label.extend(pids.numpy())
