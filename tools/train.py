@@ -27,7 +27,7 @@ def train(cfg):
     np.random.seed(0)
     # prepare dataset
     src_train_loader,src_val_loader,src_num_query,src_num_classes,tar_train_loader,tar_val_loader,DAdataSet = make_data_loader(cfg)
-
+    #
     # prepare model
     model = build_model(cfg, src_num_classes)
     train_set = make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet)
