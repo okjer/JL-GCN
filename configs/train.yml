@@ -19,8 +19,8 @@ INPUT:
 DATASETS:
   NAME1: ('market1501')
   NAME2: ('dukemtmc')
-  ROOT_DIR1: ('/home/aistudio/data/data19873/data')
-  ROOT_DIR2: ('/home/aistudio/data/data19873/data')
+  ROOT_DIR1: ('/home/aistudio/work/data/data19873/data')
+  ROOT_DIR2: ('/home/aistudio/work/data/data19873/data')
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
