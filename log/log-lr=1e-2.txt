@@ -1,0 +1,150 @@
+2020-01-25 15:38:43,667 reid_baseline INFO: Using 1 GPUS
+2020-01-25 15:38:43,667 reid_baseline INFO: Namespace(config_file='configs/train.yml', opts=[])
+2020-01-25 15:38:43,667 reid_baseline INFO: Loaded configuration file configs/train.yml
+2020-01-25 15:38:43,667 reid_baseline INFO: 
+MODEL:
+  PRETRAIN_CHOICE: 'imagenet'
+  PRETRAIN_PATH: '/home/aistudio/work/data/data19873/data/resnet50-19c8e357.pth'
+  METRIC_LOSS_TYPE: 'triplet_center'
+  IF_LABELSMOOTH: 'on'
+  IF_WITH_CENTER: 'yes'
+
+  
+
+INPUT:
+  SIZE_TRAIN: [288, 144]
+  SIZE_TEST: [288, 144]
+  PROB: 0.5 # random horizontal flip
+  RE_PROB: 0.0 # random erasing
+  PADDING: 10
+  CLUSTER_NUMBER: 500
+
+DATASETS:
+  NAME1: ('market1501')
+  NAME2: ('dukemtmc')
+  ROOT_DIR1: ('/home/aistudio/work/data/data19873/data')
+  ROOT_DIR2: ('/home/aistudio/work/data/data19873/data')
+
+DATALOADER:
+  SAMPLER: 'softmax_triplet'
+  SAMPLER2: 'softmax'
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 0
+
+SOLVER:
+  OPTIMIZER_NAME: 'Adam'
+  MAX_EPOCHS: 150
+  BASE_LR: 0.00035
+
+  CLUSTER_MARGIN: 0.3
+
+  CENTER_LR: 0.5
+  CENTER_LOSS_WEIGHT: 0.0005
+
+  RANGE_K: 2
+  RANGE_MARGIN: 0.3
+  RANGE_ALPHA: 0
+  RANGE_BETA: 1
+  RANGE_LOSS_WEIGHT: 1
+
+  BIAS_LR_FACTOR: 1
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0.0005
+  IMS_PER_BATCH: 64
+
+  STEPS: [40, 70]
+  GAMMA: 0.1
+
+  WARMUP_FACTOR: 0.01
+  WARMUP_ITERS: 10
+  WARMUP_METHOD: 'linear'
+
+  CHECKPOINT_PERIOD: 30
+  LOG_PERIOD: 20
+  EVAL_PERIOD: 30
+
+TEST:
+  IMS_PER_BATCH: 128
+  RE_RANKING: 'yes'
+  WEIGHT: "/home/aistudio/work/CDDA/log/Mar2D_CDL/resnet50_model_120.pth"
+  NECK_FEAT: 'before'
+  FEAT_NORM: 'no'
+
+OUTPUT_DIR: '/home/aistudio/work/JL-GCN/log/test'
+
+
+
+2020-01-25 15:38:43,668 reid_baseline INFO: Running with config:
+DATALOADER:
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 0
+  SAMPLER: softmax_triplet
+  SAMPLER2: softmax
+DATASETS:
+  CamNum1: 6
+  CamNum2: 8
+  NAME1: market1501
+  NAME2: dukemtmc
+  ROOT_DIR1: /home/aistudio/work/data/data19873/data
+  ROOT_DIR2: /home/aistudio/work/data/data19873/data
+GCN:
+  K_AT_HOP: [200, 5]
+INPUT:
+  CLUSTER_NUMBER: 500
+  PADDING: 10
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  PROB: 0.5
+  RE_PROB: 0.0
+  SIZE_TEST: [288, 144]
+  SIZE_TRAIN: [288, 144]
+MODEL:
+  DEVICE: cuda
+  DEVICE_ID: 0
+  IF_LABELSMOOTH: on
+  IF_WITH_CENTER: yes
+  LAST_STRIDE: 1
+  METRIC_LOSS_TYPE: triplet_center
+  NAME: resnet50
+  NECK: bnneck
+  PRETRAIN_CHOICE: imagenet
+  PRETRAIN_PATH: /home/aistudio/work/data/data19873/data/resnet50-19c8e357.pth
+OUTPUT_DIR: /home/aistudio/work/JL-GCN/log/test
+SOLVER:
+  BASE_LR: 0.00035
+  BIAS_LR_FACTOR: 1
+  CENTER_LOSS_WEIGHT: 0.0005
+  CENTER_LR: 0.5
+  CHECKPOINT_PERIOD: 30
+  CLUSTER_LOSS_WEIGHT: 0.0005
+  CLUSTER_MARGIN: 0.3
+  EVAL_PERIOD: 30
+  GAMMA: 0.1
+  IMS_PER_BATCH: 64
+  LOG_PERIOD: 20
+  MARGIN: 0.3
+  MAX_EPOCHS: 150
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: Adam
+  RANGE_ALPHA: 0
+  RANGE_BETA: 1
+  RANGE_K: 2
+  RANGE_LOSS_WEIGHT: 1
+  RANGE_MARGIN: 0.3
+  STEPS: (40, 70)
+  WARMUP_FACTOR: 0.01
+  WARMUP_ITERS: 10
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0.0005
+TEST:
+  FEAT_NORM: no
+  IMS_PER_BATCH: 128
+  NECK_FEAT: before
+  RE_RANKING: yes
+  WEIGHT: /home/aistudio/work/CDDA/log/Mar2D_CDL/resnet50_model_120.pth
+2020-01-25 15:39:35,746 reid_baseline.train INFO: Start training
+2020-01-25 15:39:45,333 reid_baseline.train INFO: Epoch:[0][0/203]	Time 9.587 (9.587)	Data 8.833 (8.833)	Loss 0.615 (0.615)	Accuracy 0.917 (0.917)	Precison 0.017 (0.017)	Recall 0.038 (0.038)
+2020-01-25 15:42:10,069 reid_baseline.train INFO: Epoch:[0][20/203]	Time 6.705 (7.349)	Data 5.933 (6.596)	Loss 0.119 (0.200)	Accuracy 0.977 (0.972)	Precison 0.000 (0.001)	Recall 0.000 (0.002)
+2020-01-25 15:44:32,731 reid_baseline.train INFO: Epoch:[0][40/203]	Time 7.162 (7.244)	Data 6.419 (6.487)	Loss 0.114 (0.163)	Accuracy 0.976 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.001)
+2020-01-25 15:46:56,060 reid_baseline.train INFO: Epoch:[0][60/203]	Time 7.116 (7.218)	Data 6.371 (6.464)	Loss 0.123 (0.150)	Accuracy 0.973 (0.973)	Precison 0.000 (0.000)	Recall 0.000 (0.001)

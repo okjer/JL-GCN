@@ -1,0 +1,193 @@
+2020-01-25 20:17:34,905 reid_baseline INFO: Using 1 GPUS
+2020-01-25 20:17:34,906 reid_baseline INFO: Namespace(config_file='configs/train.yml', opts=[])
+2020-01-25 20:17:34,906 reid_baseline INFO: Loaded configuration file configs/train.yml
+2020-01-25 20:17:34,906 reid_baseline INFO: 
+MODEL:
+  PRETRAIN_CHOICE: 'imagenet'
+  PRETRAIN_PATH: '/home/aistudio/work/data/data19873/data/resnet50-19c8e357.pth'
+  METRIC_LOSS_TYPE: 'triplet_center'
+  IF_LABELSMOOTH: 'on'
+  IF_WITH_CENTER: 'yes'
+
+  
+
+INPUT:
+  SIZE_TRAIN: [288, 144]
+  SIZE_TEST: [288, 144]
+  PROB: 0.5 # random horizontal flip
+  RE_PROB: 0.0 # random erasing
+  PADDING: 10
+  CLUSTER_NUMBER: 500
+
+DATASETS:
+  NAME1: ('market1501')
+  NAME2: ('dukemtmc')
+  ROOT_DIR1: ('/home/aistudio/work/data/data19873/data')
+  ROOT_DIR2: ('/home/aistudio/work/data/data19873/data')
+
+DATALOADER:
+  SAMPLER: 'softmax_triplet'
+  SAMPLER2: 'softmax'
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 0
+
+SOLVER:
+  OPTIMIZER_NAME: 'Adam'
+  MAX_EPOCHS: 150
+  BASE_LR: 0.00035
+
+  CLUSTER_MARGIN: 0.3
+
+  CENTER_LR: 0.5
+  CENTER_LOSS_WEIGHT: 0.0005
+
+  RANGE_K: 2
+  RANGE_MARGIN: 0.3
+  RANGE_ALPHA: 0
+  RANGE_BETA: 1
+  RANGE_LOSS_WEIGHT: 1
+
+  BIAS_LR_FACTOR: 1
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0.0005
+  IMS_PER_BATCH: 64
+
+  STEPS: [40, 70]
+  GAMMA: 0.1
+
+  WARMUP_FACTOR: 0.01
+  WARMUP_ITERS: 10
+  WARMUP_METHOD: 'linear'
+
+  CHECKPOINT_PERIOD: 30
+  LOG_PERIOD: 20
+  EVAL_PERIOD: 30
+
+TEST:
+  IMS_PER_BATCH: 128
+  RE_RANKING: 'yes'
+  WEIGHT: "/home/aistudio/work/CDDA/log/Mar2D_CDL/resnet50_model_120.pth"
+  NECK_FEAT: 'before'
+  FEAT_NORM: 'no'
+
+OUTPUT_DIR: '/home/aistudio/work/JL-GCN/log/test'
+
+
+
+2020-01-25 20:17:34,906 reid_baseline INFO: Running with config:
+DATALOADER:
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 0
+  SAMPLER: softmax_triplet
+  SAMPLER2: softmax
+DATASETS:
+  CamNum1: 6
+  CamNum2: 8
+  NAME1: market1501
+  NAME2: dukemtmc
+  ROOT_DIR1: /home/aistudio/work/data/data19873/data
+  ROOT_DIR2: /home/aistudio/work/data/data19873/data
+GCN:
+  K_AT_HOP: [200, 5]
+INPUT:
+  CLUSTER_NUMBER: 500
+  PADDING: 10
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  PROB: 0.5
+  RE_PROB: 0.0
+  SIZE_TEST: [288, 144]
+  SIZE_TRAIN: [288, 144]
+MODEL:
+  DEVICE: cuda
+  DEVICE_ID: 0
+  IF_LABELSMOOTH: on
+  IF_WITH_CENTER: yes
+  LAST_STRIDE: 1
+  METRIC_LOSS_TYPE: triplet_center
+  NAME: resnet50
+  NECK: bnneck
+  PRETRAIN_CHOICE: imagenet
+  PRETRAIN_PATH: /home/aistudio/work/data/data19873/data/resnet50-19c8e357.pth
+OUTPUT_DIR: /home/aistudio/work/JL-GCN/log/test
+SOLVER:
+  BASE_LR: 0.00035
+  BIAS_LR_FACTOR: 1
+  CENTER_LOSS_WEIGHT: 0.0005
+  CENTER_LR: 0.5
+  CHECKPOINT_PERIOD: 30
+  CLUSTER_LOSS_WEIGHT: 0.0005
+  CLUSTER_MARGIN: 0.3
+  EVAL_PERIOD: 30
+  GAMMA: 0.1
+  IMS_PER_BATCH: 64
+  LOG_PERIOD: 20
+  MARGIN: 0.3
+  MAX_EPOCHS: 150
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: Adam
+  RANGE_ALPHA: 0
+  RANGE_BETA: 1
+  RANGE_K: 2
+  RANGE_LOSS_WEIGHT: 1
+  RANGE_MARGIN: 0.3
+  STEPS: (40, 70)
+  WARMUP_FACTOR: 0.01
+  WARMUP_ITERS: 10
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY_BIAS: 0.0005
+TEST:
+  FEAT_NORM: no
+  IMS_PER_BATCH: 128
+  NECK_FEAT: before
+  RE_RANKING: yes
+  WEIGHT: /home/aistudio/work/CDDA/log/Mar2D_CDL/resnet50_model_120.pth
+2020-01-25 20:17:41,818 reid_baseline.train INFO: Start training
+2020-01-25 20:17:49,671 reid_baseline.train INFO: Epoch:[0][0/203]	Time 7.853 (7.853)	Data 7.102 (7.102)	Loss 0.824 (0.824)	Accuracy 0.041 (0.041)	Precison 0.027 (0.027)	Recall 0.949 (0.949)
+2020-01-25 20:20:03,817 reid_baseline.train INFO: Epoch:[0][20/203]	Time 6.553 (6.762)	Data 5.812 (6.021)	Loss 0.114 (0.332)	Accuracy 0.976 (0.839)	Precison 0.000 (0.006)	Recall 0.000 (0.139)
+2020-01-25 20:22:19,518 reid_baseline.train INFO: Epoch:[0][40/203]	Time 6.612 (6.773)	Data 5.874 (6.032)	Loss 0.133 (0.232)	Accuracy 0.973 (0.905)	Precison 0.000 (0.003)	Recall 0.000 (0.071)
+2020-01-25 20:24:33,251 reid_baseline.train INFO: Epoch:[0][60/203]	Time 6.724 (6.745)	Data 5.985 (6.003)	Loss 0.178 (0.197)	Accuracy 0.959 (0.927)	Precison 0.000 (0.002)	Recall 0.000 (0.048)
+2020-01-25 20:26:46,753 reid_baseline.train INFO: Epoch:[0][80/203]	Time 6.535 (6.728)	Data 5.793 (5.986)	Loss 0.112 (0.178)	Accuracy 0.976 (0.939)	Precison 0.000 (0.001)	Recall 0.000 (0.036)
+2020-01-25 20:29:02,069 reid_baseline.train INFO: Epoch:[0][100/203]	Time 6.736 (6.735)	Data 5.995 (5.993)	Loss 0.109 (0.166)	Accuracy 0.977 (0.946)	Precison 0.000 (0.001)	Recall 0.000 (0.029)
+2020-01-25 20:31:17,049 reid_baseline.train INFO: Epoch:[0][120/203]	Time 6.614 (6.737)	Data 5.866 (5.996)	Loss 0.100 (0.158)	Accuracy 0.979 (0.951)	Precison 0.000 (0.001)	Recall 0.000 (0.024)
+2020-01-25 20:33:33,098 reid_baseline.train INFO: Epoch:[0][140/203]	Time 6.971 (6.747)	Data 6.226 (6.005)	Loss 0.122 (0.152)	Accuracy 0.973 (0.954)	Precison 0.000 (0.001)	Recall 0.000 (0.021)
+2020-01-25 20:35:48,883 reid_baseline.train INFO: Epoch:[0][160/203]	Time 6.777 (6.752)	Data 6.037 (6.010)	Loss 0.121 (0.148)	Accuracy 0.974 (0.957)	Precison 0.000 (0.001)	Recall 0.000 (0.018)
+2020-01-25 20:38:04,148 reid_baseline.train INFO: Epoch:[0][180/203]	Time 6.682 (6.753)	Data 5.943 (6.012)	Loss 0.110 (0.144)	Accuracy 0.976 (0.959)	Precison 0.000 (0.001)	Recall 0.000 (0.016)
+2020-01-25 20:40:19,332 reid_baseline.train INFO: Epoch:[0][200/203]	Time 6.681 (6.754)	Data 5.937 (6.012)	Loss 0.104 (0.142)	Accuracy 0.978 (0.960)	Precison 0.000 (0.001)	Recall 0.000 (0.015)
+2020-01-25 20:40:26,909 reid_baseline.train INFO: Start training
+2020-01-25 20:40:33,729 reid_baseline.train INFO: Epoch:[1][0/203]	Time 6.819 (6.819)	Data 6.078 (6.078)	Loss 0.120 (0.120)	Accuracy 0.974 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 20:42:48,852 reid_baseline.train INFO: Epoch:[1][20/203]	Time 6.586 (6.759)	Data 5.844 (6.016)	Loss 0.108 (0.116)	Accuracy 0.977 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 20:45:04,737 reid_baseline.train INFO: Epoch:[1][40/203]	Time 6.794 (6.776)	Data 6.056 (6.034)	Loss 0.113 (0.116)	Accuracy 0.976 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 20:47:22,450 reid_baseline.train INFO: Epoch:[1][60/203]	Time 6.767 (6.812)	Data 6.027 (6.070)	Loss 0.122 (0.118)	Accuracy 0.973 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 20:49:38,068 reid_baseline.train INFO: Epoch:[1][80/203]	Time 6.946 (6.804)	Data 6.199 (6.062)	Loss 0.116 (0.118)	Accuracy 0.974 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 20:51:53,899 reid_baseline.train INFO: Epoch:[1][100/203]	Time 6.831 (6.802)	Data 6.079 (6.060)	Loss 0.113 (0.118)	Accuracy 0.975 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 20:54:09,797 reid_baseline.train INFO: Epoch:[1][120/203]	Time 6.729 (6.801)	Data 5.984 (6.058)	Loss 0.109 (0.118)	Accuracy 0.977 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 20:56:24,861 reid_baseline.train INFO: Epoch:[1][140/203]	Time 6.641 (6.794)	Data 5.903 (6.052)	Loss 0.109 (0.117)	Accuracy 0.977 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 20:58:42,520 reid_baseline.train INFO: Epoch:[1][160/203]	Time 6.865 (6.805)	Data 6.122 (6.063)	Loss 0.124 (0.118)	Accuracy 0.973 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:00:57,732 reid_baseline.train INFO: Epoch:[1][180/203]	Time 6.770 (6.800)	Data 6.026 (6.058)	Loss 0.125 (0.118)	Accuracy 0.972 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:03:12,658 reid_baseline.train INFO: Epoch:[1][200/203]	Time 6.819 (6.795)	Data 6.077 (6.053)	Loss 0.140 (0.118)	Accuracy 0.968 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:03:20,106 reid_baseline.train INFO: Start training
+2020-01-25 21:03:27,090 reid_baseline.train INFO: Epoch:[2][0/203]	Time 6.983 (6.983)	Data 6.239 (6.239)	Loss 0.124 (0.124)	Accuracy 0.972 (0.972)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:05:42,531 reid_baseline.train INFO: Epoch:[2][20/203]	Time 6.879 (6.782)	Data 6.139 (6.040)	Loss 0.104 (0.113)	Accuracy 0.978 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:07:58,119 reid_baseline.train INFO: Epoch:[2][40/203]	Time 6.567 (6.781)	Data 5.828 (6.039)	Loss 0.109 (0.116)	Accuracy 0.977 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:10:13,846 reid_baseline.train INFO: Epoch:[2][60/203]	Time 6.761 (6.783)	Data 6.018 (6.041)	Loss 0.115 (0.116)	Accuracy 0.976 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:12:30,843 reid_baseline.train INFO: Epoch:[2][80/203]	Time 6.738 (6.799)	Data 5.997 (6.058)	Loss 0.110 (0.117)	Accuracy 0.977 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:14:46,446 reid_baseline.train INFO: Epoch:[2][100/203]	Time 6.760 (6.795)	Data 6.021 (6.054)	Loss 0.104 (0.118)	Accuracy 0.979 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:17:05,197 reid_baseline.train INFO: Epoch:[2][120/203]	Time 6.682 (6.819)	Data 5.943 (6.077)	Loss 0.120 (0.118)	Accuracy 0.974 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:19:20,571 reid_baseline.train INFO: Epoch:[2][140/203]	Time 6.847 (6.812)	Data 6.100 (6.070)	Loss 0.131 (0.118)	Accuracy 0.970 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:21:37,480 reid_baseline.train INFO: Epoch:[2][160/203]	Time 6.745 (6.816)	Data 5.997 (6.074)	Loss 0.115 (0.118)	Accuracy 0.975 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:23:57,451 reid_baseline.train INFO: Epoch:[2][180/203]	Time 6.931 (6.836)	Data 6.180 (6.094)	Loss 0.122 (0.118)	Accuracy 0.973 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:26:13,795 reid_baseline.train INFO: Epoch:[2][200/203]	Time 6.631 (6.834)	Data 5.877 (6.092)	Loss 0.130 (0.118)	Accuracy 0.971 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:26:21,546 reid_baseline.train INFO: Start training
+2020-01-25 21:26:28,349 reid_baseline.train INFO: Epoch:[3][0/203]	Time 6.803 (6.803)	Data 6.064 (6.064)	Loss 0.100 (0.100)	Accuracy 0.979 (0.979)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:28:45,612 reid_baseline.train INFO: Epoch:[3][20/203]	Time 6.713 (6.860)	Data 5.976 (6.118)	Loss 0.123 (0.115)	Accuracy 0.972 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:31:00,980 reid_baseline.train INFO: Epoch:[3][40/203]	Time 6.717 (6.815)	Data 5.972 (6.073)	Loss 0.102 (0.116)	Accuracy 0.978 (0.975)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:33:16,296 reid_baseline.train INFO: Epoch:[3][60/203]	Time 6.978 (6.799)	Data 6.241 (6.058)	Loss 0.115 (0.118)	Accuracy 0.975 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:35:32,594 reid_baseline.train INFO: Epoch:[3][80/203]	Time 6.712 (6.803)	Data 5.973 (6.062)	Loss 0.118 (0.119)	Accuracy 0.975 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:37:46,634 reid_baseline.train INFO: Epoch:[3][100/203]	Time 6.706 (6.783)	Data 5.966 (6.042)	Loss 0.106 (0.119)	Accuracy 0.977 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:40:01,321 reid_baseline.train INFO: Epoch:[3][120/203]	Time 6.752 (6.775)	Data 6.013 (6.033)	Loss 0.123 (0.119)	Accuracy 0.973 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:42:16,514 reid_baseline.train INFO: Epoch:[3][140/203]	Time 6.824 (6.773)	Data 6.082 (6.031)	Loss 0.104 (0.119)	Accuracy 0.978 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:44:31,809 reid_baseline.train INFO: Epoch:[3][160/203]	Time 6.675 (6.772)	Data 5.933 (6.030)	Loss 0.112 (0.119)	Accuracy 0.976 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:46:47,773 reid_baseline.train INFO: Epoch:[3][180/203]	Time 6.693 (6.775)	Data 5.944 (6.033)	Loss 0.132 (0.118)	Accuracy 0.971 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
+2020-01-25 21:49:15,314 reid_baseline.train INFO: Epoch:[3][200/203]	Time 7.948 (6.835)	Data 7.208 (6.093)	Loss 0.123 (0.118)	Accuracy 0.973 (0.974)	Precison 0.000 (0.000)	Recall 0.000 (0.000)
