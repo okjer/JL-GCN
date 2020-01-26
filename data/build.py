@@ -4,20 +4,23 @@
 @contact: sherlockliao01@gmail.com
 """
 
+import os.path as osp
+import torch
+import torch.nn as nn
+import numpy as np
+import logging
+import time
+
 from torch.utils.data import DataLoader
 from .collate_batch import train_collate_fn, val_collate_fn
 from .datasets import init_dataset, ImageDataset,DADataset
 #from .samplers import RandomIdentitySampler, RandomIdentitySampler_alignedreid  # New add by gu
 from .transforms import build_transforms
-import os.path as osp
-import torch
-import torch.nn as nn
-from scipy.spatial.distance import cdist
-import numpy as np
 from gcn_clustering import Feeder,gcn,AverageMeter
-import logging
-import time
+from scipy.spatial.distance import cdist
 from sklearn.metrics import precision_score, recall_score
+
+
 
 
 def make_data_loader(cfg):
@@ -99,7 +102,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
                     torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
         distmat.addmm_(1, -2, feat, feat.t())
-        knn_graph = torch.argsort(distmat,dim = 1).cpu().numpy()[:,:k_at_hop[0]+1]
+        knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()[:,:k_at_hop[0]+1]
         
 
         np.save(feat_path,feat)
@@ -144,8 +147,9 @@ def train(loader, net, crit, opt, epoch,lr):
         data_time.update(time.time() - end)
         feat, adj, cid, h1id, gtmat = map(lambda x: x.cuda(), 
                                 (feat, adj, cid, h1id, gtmat))
-        pred = net(feat, adj, h1id)
+        pred = net(feat, adj, h1id)#h1id(8,200)
         labels = make_labels(gtmat).long()
+        logger.info("第{0}个batch,正样本占比{1}%",i,torch.mean(labels.float())*100)
         loss = crit(pred, labels)
         p,r, acc = accuracy(pred, labels)
         
@@ -161,6 +165,7 @@ def train(loader, net, crit, opt, epoch,lr):
         batch_time.update(time.time()- end)
         end = time.time()
         if i % 20 == 0:
+            
             logger.info('Epoch:[{0}][{1}/{2}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                   'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
