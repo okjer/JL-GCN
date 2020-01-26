@@ -1,6 +1,6 @@
 MODEL:
-  PRETRAIN_CHOICE: 'imagenet'
-  PRETRAIN_PATH: '/home/aistudio/data/data19873/data/resnet50-19c8e357.pth'
+  PRETRAIN_CHOICE: 'self'
+  PRETRAIN_PATH: '/home/aistudio/data/data20026/resnet50.pth'
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
