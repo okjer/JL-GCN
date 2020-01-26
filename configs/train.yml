@@ -5,7 +5,8 @@ MODEL:
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
 
-  
+GCN:
+  GCN.K_AT_HOP: [200,10]
 
 INPUT:
   SIZE_TRAIN: [288, 144]
