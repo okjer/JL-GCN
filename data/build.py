@@ -148,7 +148,7 @@ def train(loader, net, crit, opt, epoch,lr):
         feat, adj, cid, h1id, gtmat = map(lambda x: x.cuda(), 
                                 (feat, adj, cid, h1id, gtmat))
         pred = net(feat, adj, h1id)#h1id(8,200)
-        labels = make_labels(gtmat).long()
+        labels = make_labels(gtmat).long()  #sa
         logger.info("第{0}个batch,正样本占比{1}%",i,torch.mean(labels.float())*100)
         loss = crit(pred, labels)
         p,r, acc = accuracy(pred, labels)
