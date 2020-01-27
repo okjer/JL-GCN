@@ -52,7 +52,6 @@ class Feeder(data.Dataset):
             for h in hops[-2]:
                 hops[-1].update(set(self.knn_graph[h][1:self.k_at_hop[d]+1]))
 
-        
         hops_set = set([h for hop in hops for h in hop])
         hops_set.update([center_node,])
         unique_nodes_list = list(hops_set) 

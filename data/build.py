@@ -11,14 +11,14 @@ import numpy as np
 import logging
 import time
 
-from torch.utils.data import DataLoader
+"""from torch.utils.data import DataLoader
 from .collate_batch import train_collate_fn, val_collate_fn
 from .datasets import init_dataset, ImageDataset,DADataset
 #from .samplers import RandomIdentitySampler, RandomIdentitySampler_alignedreid  # New add by gu
 from .transforms import build_transforms
 from gcn_clustering import Feeder,gcn,AverageMeter
 from scipy.spatial.distance import cdist
-from sklearn.metrics import precision_score, recall_score
+from sklearn.metrics import precision_score, recall_score"""
 
 
 
@@ -71,12 +71,12 @@ def make_data_loader(cfg):
     return src_train_loader, src_val_loader, src_num_query, src_num_classes,tar_train_loader,tar_val_loader,daDataset
 
 def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
-    lr = 1e-2
+    lr = 1e-6
     feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
     knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
     label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
     k_at_hop = cfg.GCN.K_AT_HOP
-    if False:
+    if True:
         #准备有标签样本的Feeder
         #sadasdas
         model.eval()
@@ -98,12 +98,11 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         
         #distmat = np.power(
         #    cdist(feat, feat), 2).astype(np.float16)
-
         distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
                     torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
         distmat.addmm_(1, -2, feat, feat.t())
         knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()[:,:k_at_hop[0]+1]
-        
+        feat.cpu()
 
         np.save(feat_path,feat)
         np.save(knn_graph_path,knn_graph)
@@ -197,3 +196,12 @@ def accuracy(pred, label):
 
 def make_labels(gtmat):
     return gtmat.view(-1)
+
+if __name__ == "__main__":
+    N = 3
+    feat = torch.Tensor([[1,2,3],[3,4,5],[6,7,8]]).cuda()
+    distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
+                torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
+    distmat.addmm_(1, -2, feat, feat.t())
+    knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()
+    a = 4
