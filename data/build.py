@@ -88,7 +88,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         with torch.no_grad():
             for i,(imgs,pids,camids,fileNames) in enumerate(src_train_loader):
                 outputs = model(imgs)
-                feat.extend(outputs)
+                feat.extend(outputs.cpu())
                 label.extend(pids.numpy())
                 print(i)
         label = np.array(label)
@@ -102,8 +102,6 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
                     torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
         distmat.addmm_(1, -2, feat, feat.t())
         knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()[:,:k_at_hop[0]+1]
-        feat.cpu()
-
         np.save(feat_path,feat)
         np.save(knn_graph_path,knn_graph)
         np.save(label_path,label)
