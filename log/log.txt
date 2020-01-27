@@ -1,6 +1,6 @@
-2020-01-27 15:12:56,057 reid_baseline INFO: Using 1 GPUS
-2020-01-27 15:12:56,058 reid_baseline INFO: Namespace(config_file='', opts=[])
-2020-01-27 15:12:56,059 reid_baseline INFO: Running with config:
+2020-01-27 15:43:06,512 reid_baseline INFO: Using 1 GPUS
+2020-01-27 15:43:06,515 reid_baseline INFO: Namespace(config_file='', opts=[])
+2020-01-27 15:43:06,516 reid_baseline INFO: Running with config:
 DATALOADER:
   NUM_INSTANCE: 2
   NUM_WORKERS: 0
@@ -69,3 +69,48 @@ TEST:
   NECK_FEAT: after
   RE_RANKING: no
   WEIGHT: C:/Users/86180/.cache/torch/checkpoints/resnet18-5c106cde.pth
+2020-01-27 15:43:23,312 reid_baseline.train INFO: Start training
+2020-01-27 15:43:24,521 reid_baseline.train INFO: 第0个batch,正样本占比0.3124999701976776%
+2020-01-27 15:43:27,520 reid_baseline.train INFO: Epoch:[0][0/1617]	Time 1.452 (1.452)	Data 0.687 (0.687)	Loss 0.725 (0.725)	Accuracy 0.035 (0.035)	Precison 0.003 (0.003)	Recall 1.000 (1.000)
+2020-01-27 15:43:30,453 reid_baseline.train INFO: 第1个batch,正样本占比0.9374999403953552%
+2020-01-27 15:43:33,143 reid_baseline.train INFO: Epoch:[0][1/1617]	Time 5.947 (3.700)	Data 4.182 (2.435)	Loss 0.724 (0.724)	Accuracy 0.037 (0.036)	Precison 0.010 (0.006)	Recall 1.000 (1.000)
+2020-01-27 15:43:34,061 reid_baseline.train INFO: 第2个batch,正样本占比0.875%
+2020-01-27 15:43:34,311 reid_baseline.train INFO: Epoch:[0][2/1617]	Time 3.599 (3.666)	Data 3.077 (2.649)	Loss 0.726 (0.725)	Accuracy 0.043 (0.038)	Precison 0.008 (0.007)	Recall 0.929 (0.976)
+2020-01-27 15:43:35,155 reid_baseline.train INFO: 第3个batch,正样本占比0.6249999403953552%
+2020-01-27 15:43:35,400 reid_baseline.train INFO: Epoch:[0][3/1617]	Time 1.090 (3.022)	Data 0.576 (2.131)	Loss 0.719 (0.724)	Accuracy 0.074 (0.047)	Precison 0.007 (0.007)	Recall 1.000 (0.982)
+2020-01-27 15:43:36,266 reid_baseline.train INFO: 第4个batch,正样本占比0.875%
+2020-01-27 15:43:36,512 reid_baseline.train INFO: Epoch:[0][4/1617]	Time 1.112 (2.640)	Data 0.598 (1.824)	Loss 0.722 (0.723)	Accuracy 0.029 (0.043)	Precison 0.009 (0.007)	Recall 1.000 (0.986)
+2020-01-27 15:43:37,358 reid_baseline.train INFO: 第5个batch,正样本占比0.9374999403953552%
+2020-01-27 15:43:37,605 reid_baseline.train INFO: Epoch:[0][5/1617]	Time 1.092 (2.382)	Data 0.575 (1.616)	Loss 0.729 (0.724)	Accuracy 0.020 (0.040)	Precison 0.009 (0.008)	Recall 1.000 (0.988)
+2020-01-27 15:43:38,524 reid_baseline.train INFO: 第6个batch,正样本占比0.875%
+2020-01-27 15:43:38,770 reid_baseline.train INFO: Epoch:[0][6/1617]	Time 1.164 (2.208)	Data 0.652 (1.478)	Loss 0.713 (0.723)	Accuracy 0.118 (0.051)	Precison 0.009 (0.008)	Recall 0.929 (0.980)
+2020-01-27 15:43:39,697 reid_baseline.train INFO: 第7个batch,正样本占比0.375%
+2020-01-27 15:43:39,941 reid_baseline.train INFO: Epoch:[0][7/1617]	Time 1.172 (2.078)	Data 0.658 (1.376)	Loss 0.722 (0.723)	Accuracy 0.064 (0.052)	Precison 0.004 (0.007)	Recall 1.000 (0.982)
+2020-01-27 15:43:40,837 reid_baseline.train INFO: 第8个batch,正样本占比1.1875%
+2020-01-27 15:43:41,082 reid_baseline.train INFO: Epoch:[0][8/1617]	Time 1.141 (1.974)	Data 0.626 (1.293)	Loss 0.721 (0.722)	Accuracy 0.089 (0.056)	Precison 0.013 (0.008)	Recall 1.000 (0.984)
+2020-01-27 15:43:41,969 reid_baseline.train INFO: 第9个batch,正样本占比0.8125%
+2020-01-27 15:43:42,212 reid_baseline.train INFO: Epoch:[0][9/1617]	Time 1.130 (1.890)	Data 0.618 (1.225)	Loss 0.723 (0.722)	Accuracy 0.069 (0.058)	Precison 0.008 (0.008)	Recall 0.923 (0.978)
+2020-01-27 15:43:43,082 reid_baseline.train INFO: 第10个batch,正样本占比0.8125%
+2020-01-27 15:43:43,329 reid_baseline.train INFO: Epoch:[0][10/1617]	Time 1.118 (1.820)	Data 0.601 (1.168)	Loss 0.718 (0.722)	Accuracy 0.025 (0.055)	Precison 0.008 (0.008)	Recall 1.000 (0.980)
+2020-01-27 15:43:44,205 reid_baseline.train INFO: 第11个batch,正样本占比1.6874998807907104%
+2020-01-27 15:43:44,449 reid_baseline.train INFO: Epoch:[0][11/1617]	Time 1.119 (1.761)	Data 0.608 (1.122)	Loss 0.721 (0.722)	Accuracy 0.097 (0.058)	Precison 0.017 (0.009)	Recall 0.926 (0.976)
+2020-01-27 15:43:45,316 reid_baseline.train INFO: 第12个batch,正样本占比0.6875%
+2020-01-27 15:43:45,562 reid_baseline.train INFO: Epoch:[0][12/1617]	Time 1.113 (1.711)	Data 0.599 (1.081)	Loss 0.717 (0.721)	Accuracy 0.112 (0.062)	Precison 0.007 (0.009)	Recall 0.909 (0.970)
+2020-01-27 15:43:46,459 reid_baseline.train INFO: 第13个batch,正样本占比1.4374998807907104%
+2020-01-27 15:43:46,708 reid_baseline.train INFO: Epoch:[0][13/1617]	Time 1.147 (1.671)	Data 0.628 (1.049)	Loss 0.722 (0.722)	Accuracy 0.039 (0.061)	Precison 0.015 (0.009)	Recall 1.000 (0.973)
+2020-01-27 15:43:47,738 reid_baseline.train INFO: 第14个batch,正样本占比2.0625%
+2020-01-27 15:43:47,984 reid_baseline.train INFO: Epoch:[0][14/1617]	Time 1.276 (1.645)	Data 0.752 (1.029)	Loss 0.716 (0.721)	Accuracy 0.079 (0.062)	Precison 0.020 (0.010)	Recall 0.909 (0.968)
+2020-01-27 15:43:48,907 reid_baseline.train INFO: 第15个batch,正样本占比2.0%
+2020-01-27 15:43:49,152 reid_baseline.train INFO: Epoch:[0][15/1617]	Time 1.167 (1.615)	Data 0.652 (1.006)	Loss 0.718 (0.721)	Accuracy 0.061 (0.062)	Precison 0.018 (0.010)	Recall 0.875 (0.962)
+2020-01-27 15:43:50,025 reid_baseline.train INFO: 第16个batch,正样本占比1.1875%
+2020-01-27 15:43:50,269 reid_baseline.train INFO: Epoch:[0][16/1617]	Time 1.117 (1.586)	Data 0.604 (0.982)	Loss 0.721 (0.721)	Accuracy 0.033 (0.060)	Precison 0.012 (0.010)	Recall 1.000 (0.965)
+2020-01-27 15:43:51,182 reid_baseline.train INFO: 第17个batch,正样本占比1.375%
+2020-01-27 15:43:51,426 reid_baseline.train INFO: Epoch:[0][17/1617]	Time 1.157 (1.562)	Data 0.643 (0.963)	Loss 0.719 (0.721)	Accuracy 0.036 (0.059)	Precison 0.014 (0.011)	Recall 1.000 (0.967)
+2020-01-27 15:43:52,270 reid_baseline.train INFO: 第18个batch,正样本占比0.6875%
+2020-01-27 15:43:52,518 reid_baseline.train INFO: Epoch:[0][18/1617]	Time 1.092 (1.537)	Data 0.574 (0.943)	Loss 0.725 (0.721)	Accuracy 0.052 (0.058)	Precison 0.007 (0.010)	Recall 1.000 (0.968)
+2020-01-27 15:43:53,439 reid_baseline.train INFO: 第19个batch,正样本占比1.0%
+2020-01-27 15:43:53,690 reid_baseline.train INFO: Epoch:[0][19/1617]	Time 1.172 (1.519)	Data 0.650 (0.928)	Loss 0.716 (0.721)	Accuracy 0.059 (0.058)	Precison 0.010 (0.010)	Recall 0.938 (0.967)
+2020-01-27 15:43:54,611 reid_baseline.train INFO: 第20个batch,正样本占比0.6875%
+2020-01-27 15:43:54,857 reid_baseline.train INFO: Epoch:[0][20/1617]	Time 1.167 (1.502)	Data 0.649 (0.915)	Loss 0.714 (0.721)	Accuracy 0.078 (0.059)	Precison 0.007 (0.010)	Recall 0.909 (0.964)
+2020-01-27 15:43:55,759 reid_baseline.train INFO: 第21个batch,正样本占比0.4375%
+2020-01-27 15:43:56,006 reid_baseline.train INFO: Epoch:[0][21/1617]	Time 1.149 (1.486)	Data 0.632 (0.902)	Loss 0.713 (0.720)	Accuracy 0.060 (0.059)	Precison 0.005 (0.010)	Recall 1.000 (0.966)
