@@ -67,7 +67,6 @@ _C.INPUT.PIXEL_MEAN = [0.485, 0.456, 0.406]
 _C.INPUT.PIXEL_STD = [0.229, 0.224, 0.225]
 # Value of padding size
 _C.INPUT.PADDING = 10
-_C.INPUT.CLUSTER_NUMBER = 500
 
 # -----------------------------------------------------------------------------
 # Dataset  

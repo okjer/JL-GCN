@@ -76,7 +76,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
     knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
     label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
     k_at_hop = cfg.GCN.K_AT_HOP
-    if True:
+    if False:
         #准备有标签样本的Feeder
         #sadasdas
         model.eval()
@@ -124,7 +124,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
                           weight_decay=1e-4) 
 
     criterion = nn.CrossEntropyLoss().cuda()
-    for epoch in range(4):
+    for epoch in range(100):
         adjust_lr(opt, epoch,lr)
         train(trainloader, net, criterion, opt, epoch,lr)
     return trainset

@@ -1,12 +1,12 @@
 MODEL:
   PRETRAIN_CHOICE: 'self'
-  PRETRAIN_PATH: '/home/aistudio/data/data20026/resnet50.pth'
+  PRETRAIN_PATH: '‪D:\download\chromedownload\resnet50.pth'
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
 
 GCN:
-  K_AT_HOP: [200,5]
+  K_AT_HOP: [200,10]
 
 INPUT:
   SIZE_TRAIN: [288, 144]
@@ -14,12 +14,13 @@ INPUT:
   PROB: 0.5 # random horizontal flip
   RE_PROB: 0.0 # random erasing
   PADDING: 10
+  CLUSTER_NUMBER: 500
 
 DATASETS:
   NAME1: ('market1501')
   NAME2: ('dukemtmc')
-  ROOT_DIR1: ('/home/aistudio/work/data/data19873/data')
-  ROOT_DIR2: ('/home/aistudio/work/data/data19873/data')
+  ROOT_DIR1: ('../../.././')
+  ROOT_DIR2: ('../../.././')
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
@@ -46,7 +47,7 @@ SOLVER:
   BIAS_LR_FACTOR: 1
   WEIGHT_DECAY: 0.0005
   WEIGHT_DECAY_BIAS: 0.0005
-  IMS_PER_BATCH: 64
+  IMS_PER_BATCH: 16
 
   STEPS: [40, 70]
   GAMMA: 0.1
@@ -66,6 +67,6 @@ TEST:
   NECK_FEAT: 'before'
   FEAT_NORM: 'no'
 
-OUTPUT_DIR: '/home/aistudio/work/JL-GCN/log/test'
+OUTPUT_DIR: './log'
 
 
