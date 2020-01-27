@@ -71,12 +71,8 @@ class gcn(nn.Module):
         x = self.bn0(x)
         x = x.view(B,N,D)
 
-        print(torch.isnan(x).sum())
-        print(torch.isnan(A).sum())
         x = self.conv1(x,A)
-        print(torch.isnan(x).sum())
         x = self.conv2(x,A)
-        print(torch.isnan(x))
         x = self.conv3(x,A)
         x = self.conv4(x,A)
         k1 = one_hop_idcs.size(-1)
