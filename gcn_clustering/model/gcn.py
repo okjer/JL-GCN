@@ -13,7 +13,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn import init
-import numpy as np
 
 
 class MeanAggregator(nn.Module):
@@ -21,7 +20,6 @@ class MeanAggregator(nn.Module):
         super(MeanAggregator, self).__init__()
     def forward(self, features, A ):
         x = torch.bmm(A, features)
-        torch.isnan(features).sum()
         return x 
 
 class GraphConv(nn.Module):
@@ -70,6 +68,7 @@ class gcn(nn.Module):
         x = x.view(-1, D)
         x = self.bn0(x)
         x = x.view(B,N,D)
+
 
         x = self.conv1(x,A)
         x = self.conv2(x,A)
