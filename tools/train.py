@@ -140,7 +140,7 @@ def train(cfg):
 def main():
     parser = argparse.ArgumentParser(description="ReID Baseline Training")
     parser.add_argument(
-        "--config_file", default="./configs/train2.yml", help="path to config file", type=str
+        "--config_file", default="", help="path to config file", type=str
     )
     parser.add_argument("opts", help="Modify config options using the command-line", default=None,
                         nargs=argparse.REMAINDER)

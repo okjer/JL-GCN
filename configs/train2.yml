@@ -1,6 +1,6 @@
 MODEL:
   PRETRAIN_CHOICE: 'self'
-  PRETRAIN_PATH: '‪D:\download\chromedownload\resnet50.pth'
+  PRETRAIN_PATH: '‪C:\Users\86180\.cache\torch\checkpoints\resnet50-19c8e357.pth'
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
@@ -14,7 +14,6 @@ INPUT:
   PROB: 0.5 # random horizontal flip
   RE_PROB: 0.0 # random erasing
   PADDING: 10
-  CLUSTER_NUMBER: 500
 
 DATASETS:
   NAME1: ('market1501')
@@ -47,7 +46,7 @@ SOLVER:
   BIAS_LR_FACTOR: 1
   WEIGHT_DECAY: 0.0005
   WEIGHT_DECAY_BIAS: 0.0005
-  IMS_PER_BATCH: 16
+  IMS_PER_BATCH: 8
 
   STEPS: [40, 70]
   GAMMA: 0.1

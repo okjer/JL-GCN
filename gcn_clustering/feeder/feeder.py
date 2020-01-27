@@ -23,6 +23,7 @@ class Feeder(data.Dataset):
         np.random.seed(seed)
         random.seed(seed)
         self.features = np.load(feat_path)
+        np.any(np.isnan(self.features))
         self.knn_graph = np.load(knn_graph_path)[:,:k_at_hop[0]+1]
         self.labels = np.load(label_path)
         self.num_samples = len(self.features)
@@ -75,13 +76,12 @@ class Feeder(data.Dataset):
             for n in neighbors:
                 if n in unique_nodes_list: 
                     A[unique_nodes_map[node], unique_nodes_map[n]] = 1
-                    A[unique_nodes_map[n], unique_nodes_map[node]] = 1
 
-        D = A.sum(1, keepdim=True)
+        D = A.sum(1, keepdim=True)+1
         A = A.div(D)
         A_ = torch.zeros(max_num_nodes,max_num_nodes)
         A_[:num_nodes,:num_nodes] = A
-
+        torch.isnan(A).sum()
         
         labels = self.labels[np.asarray(unique_nodes_list)]
         labels = torch.from_numpy(labels).type(torch.long)
