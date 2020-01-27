@@ -76,7 +76,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
     knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
     label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
     k_at_hop = cfg.GCN.K_AT_HOP
-    if False:
+    if True:
         #准备有标签样本的Feeder
         #sadasdas
         model.eval()
