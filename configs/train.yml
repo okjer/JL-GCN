@@ -1,12 +1,12 @@
 MODEL:
-  PRETRAIN_CHOICE: 'self'
-  PRETRAIN_PATH: '/home/aistudio/data/data20026/resnet50.pth'
+  PRETRAIN_CHOICE: 'imagenet'
+  PRETRAIN_PATH: '/home/aistudio/work/data/data19873/data/resnet50-19c8e357.pth'
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
 
 GCN:
-  K_AT_HOP: [200,5]
+  K_AT_HOP: [200,10]
 
 INPUT:
   SIZE_TRAIN: [288, 144]
