@@ -1,6 +1,6 @@
-2020-01-27 19:44:21,862 reid_baseline INFO: Using 1 GPUS
-2020-01-27 19:44:21,865 reid_baseline INFO: Namespace(config_file='', opts=[])
-2020-01-27 19:44:21,868 reid_baseline INFO: Running with config:
+2020-01-27 19:47:14,113 reid_baseline INFO: Using 1 GPUS
+2020-01-27 19:47:14,114 reid_baseline INFO: Namespace(config_file='', opts=[])
+2020-01-27 19:47:14,115 reid_baseline INFO: Running with config:
 DATALOADER:
   NUM_INSTANCE: 2
   NUM_WORKERS: 0
@@ -68,4 +68,3 @@ TEST:
   NECK_FEAT: after
   RE_RANKING: no
   WEIGHT: C:/Users/86180/.cache/torch/checkpoints/resnet18-5c106cde.pth
-2020-01-27 19:44:34,380 reid_baseline.train INFO: Start training
