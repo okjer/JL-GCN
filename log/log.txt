@@ -68,3 +68,5 @@ TEST:
   NECK_FEAT: after
   RE_RANKING: no
   WEIGHT: C:/Users/86180/.cache/torch/checkpoints/resnet18-5c106cde.pth
+2020-01-27 19:47:27,120 reid_baseline.train INFO: Start training
+2020-01-27 19:47:48,857 reid_baseline.train INFO: 第0个batch,正样本占比0.3124999701976776%

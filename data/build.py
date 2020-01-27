@@ -147,7 +147,6 @@ def train(loader, net, crit, opt, epoch,lr):
                                 (feat, adj, cid, h1id, gtmat))
         pred = net(feat, adj, h1id)#h1id(8,200)
         labels = make_labels(gtmat).long()  #sa
-        logger.info("第{0}个batch,正样本占比{1}%".format(i,torch.mean(labels.float())*100))
         loss = crit(pred, labels)
         p,r, acc = accuracy(pred, labels)
         
@@ -162,7 +161,7 @@ def train(loader, net, crit, opt, epoch,lr):
     
         batch_time.update(time.time()- end)
         end = time.time()
-        if i % 1 == 0:
+        if i % 20 == 0:
             
             logger.info('Epoch:[{0}][{1}/{2}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
@@ -174,6 +173,7 @@ def train(loader, net, crit, opt, epoch,lr):
                         epoch, i, len(loader), batch_time=batch_time,
                         data_time=data_time, losses=losses, accs=accs, 
                         precisions=precisions, recalls=recalls))
+            logger.info("第{0}个batch,正样本占比{1}%".format(i,torch.mean(labels.float())*100))
 
 def adjust_lr(opt, epoch,lr):
     scale = 0.1
