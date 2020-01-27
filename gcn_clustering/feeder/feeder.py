@@ -81,7 +81,6 @@ class Feeder(data.Dataset):
         A = A.div(D)
         A_ = torch.zeros(max_num_nodes,max_num_nodes)
         A_[:num_nodes,:num_nodes] = A
-        torch.isnan(A).sum()
         
         labels = self.labels[np.asarray(unique_nodes_list)]
         labels = torch.from_numpy(labels).type(torch.long)
