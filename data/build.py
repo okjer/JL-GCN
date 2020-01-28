@@ -71,7 +71,7 @@ def make_data_loader(cfg):
     return src_train_loader, src_val_loader, src_num_query, src_num_classes,tar_train_loader,tar_val_loader,daDataset
 
 def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
-    lr = 1e-5
+    lr = 1e-4
     feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
     knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
     label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
