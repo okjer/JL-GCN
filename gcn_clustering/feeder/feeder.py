@@ -75,7 +75,7 @@ class Feeder(data.Dataset):
             neighbors = self.knn_graph[node, 1:self.active_connection+1]
             for n in neighbors:
                 if n in unique_nodes_list: 
-                    A[unique_nodes_map[node], unique_nodes_map[n]] = 1
+                    A[unique_nodes_map[node], unique_nodes_map[n]] = 2
 
         D = A.sum(1, keepdim=True)+1
         A = A.div(D)
