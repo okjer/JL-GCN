@@ -1,6 +1,6 @@
-2020-02-01 13:21:20,595 reid_baseline INFO: Using 1 GPUS
-2020-02-01 13:21:20,596 reid_baseline INFO: Namespace(config_file='', opts=[])
-2020-02-01 13:21:20,597 reid_baseline INFO: Running with config:
+2020-02-01 17:38:06,197 reid_baseline INFO: Using 1 GPUS
+2020-02-01 17:38:06,199 reid_baseline INFO: Namespace(config_file='', opts=[])
+2020-02-01 17:38:06,200 reid_baseline INFO: Running with config:
 DATALOADER:
   NUM_INSTANCE: 2
   NUM_WORKERS: 0

@@ -95,7 +95,8 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         N = len(feat)
         D = feat[0].size()[0]
         feat = torch.cat([f.view(1,D) for f in feat],0)
-        
+        feat = feat[0:1000,:]
+        label = label[0:1000]
         #distmat = np.power(
         #    cdist(feat, feat), 2).astype(np.float16)
         distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
@@ -154,8 +155,8 @@ def train(loader, net, crit, opt, epoch,lr):
         data_time.update(time.time() - end)
         feat, adj, cid, h1id, gtmat = map(lambda x: x.cuda(), 
                                 (feat, adj, cid, h1id, gtmat))
-        pred = net(feat, adj, h1id)#h1id(8,200)
-        labels = make_labels(gtmat).long()  #sa
+        pred = net(feat, adj, h1id)#h1id(8,200) pred(1600,2)
+        labels = make_labels(gtmat).long()  #(1600)
         loss = crit(pred, labels)
         p,r, acc = accuracy(pred, labels)
         
