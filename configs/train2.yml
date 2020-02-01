@@ -4,6 +4,7 @@ MODEL:
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
+  NECK: 'no'
 
 GCN:
   K_AT_HOP: [200,10]
