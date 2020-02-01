@@ -95,8 +95,8 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         
         D = feat[0].size()[0]
         feat = torch.cat([f.view(1,D) for f in feat],0)
-        feat = feat[0:1000,:]
-        label = label[0:1000]
+        #feat = feat[0:1000,:]
+        #label = label[0:1000]
         N = len(feat)
         
         #distmat = np.power(
