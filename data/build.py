@@ -93,11 +93,12 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
                 label.extend(pids.numpy())
         label = np.array(label)
         
+        D = feat[0].size()[0]
         feat = torch.cat([f.view(1,D) for f in feat],0)
         feat = feat[0:1000,:]
         label = label[0:1000]
         N = len(feat)
-        D = feat[0].size()[0]
+        
         #distmat = np.power(
         #    cdist(feat, feat), 2).astype(np.float16)
         distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
