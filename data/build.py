@@ -102,23 +102,12 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         #distmat = np.power(
         #    cdist(feat, feat), 2).astype(np.float16)
 
-        def cosine_distance(matrix1, matrix2):
-            matrix1_matrix2 = np.dot(matrix1, matrix2.transpose())
-            matrix1_norm = np.sqrt(np.multiply(matrix1, matrix1).sum(axis=1))
-            matrix1_norm = matrix1_norm[:, np.newaxis]
-            matrix2_norm = np.sqrt(np.multiply(matrix2, matrix2).sum(axis=1))
-            matrix2_norm = matrix2_norm[:, np.newaxis]
-            cosine_distance = np.divide(matrix1_matrix2, np.dot(matrix1_norm, matrix2_norm.transpose()))
-            return cosine_distance
+        
+        distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
+                    torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
+        distmat.addmm_(1, -2, feat, feat.t())
+        knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()[:,:k_at_hop[0]+1]
         feat = feat.cpu().numpy()
-        distmat = cosine_distance(feat,feat)
-
-        #distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
-        #            torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
-        #distmat.addmm_(1, -2, feat, feat.t())
-        #knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()[:,:k_at_hop[0]+1]
-        knn_graph = np.argsort(distmat,axis = 1)[:,:k_at_hop[0]+1]
-        #feat = feat.cpu().numpy()
         #标准化
         
         mean = np.mean(feat,axis=0)
