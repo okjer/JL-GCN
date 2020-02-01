@@ -65,7 +65,7 @@ TEST:
   RE_RANKING: 'yes'
   WEIGHT: "/home/aistudio/work/CDDA/log/Mar2D_CDL/resnet50_model_120.pth"
   NECK_FEAT: 'before'
-  FEAT_NORM: 'no'
+  FEAT_NORM: 'yes'
 
 OUTPUT_DIR: '/home/aistudio/work/JL-GCN/log/test'
 
