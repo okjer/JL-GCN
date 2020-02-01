@@ -75,10 +75,10 @@ class Feeder(data.Dataset):
             neighbors = self.knn_graph[node, 1:self.active_connection+1]
             for n in neighbors:
                 if n in unique_nodes_list: 
-                    A[unique_nodes_map[node], unique_nodes_map[n]] = 2
+                    A[unique_nodes_map[node], unique_nodes_map[n]] = 1
 
-        D = A.sum(1, keepdim=True)+1
-        A = A.div(D)
+        D = A.sum(1, keepdim=True)+1#D(359,1)
+        A = A.div(D)  #A(359,359)
         A_ = torch.zeros(max_num_nodes,max_num_nodes)
         A_[:num_nodes,:num_nodes] = A
         

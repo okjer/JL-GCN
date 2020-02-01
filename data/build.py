@@ -11,14 +11,14 @@ import numpy as np
 import logging
 import time
 
-from torch.utils.data import DataLoader
+"""from torch.utils.data import DataLoader
 from .collate_batch import train_collate_fn, val_collate_fn
 from .datasets import init_dataset, ImageDataset,DADataset
 #from .samplers import RandomIdentitySampler, RandomIdentitySampler_alignedreid  # New add by gu
 from .transforms import build_transforms
 from gcn_clustering import Feeder,gcn,AverageMeter
 from scipy.spatial.distance import cdist
-from sklearn.metrics import precision_score, recall_score
+from sklearn.metrics import precision_score, recall_score"""
 
 
 
@@ -76,7 +76,7 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
     knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
     label_path = osp.join(cfg.OUTPUT_DIR,'label.npy')
     k_at_hop = cfg.GCN.K_AT_HOP
-    if False:
+    if True:
         #准备有标签样本的Feeder
         #sadasdas
         model.eval()
@@ -102,7 +102,11 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
                     torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
         distmat.addmm_(1, -2, feat, feat.t())
         knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()[:,:k_at_hop[0]+1]
-        feat = feat.cpu()
+        feat = feat.cpu().numpy()
+        #标准化
+        mean = np.mean(feat,axis=0)
+        std = np.std(feat,axis=0)
+        feat = (feat-mean)/std
         np.save(feat_path,feat)
         np.save(knn_graph_path,knn_graph)
         np.save(label_path,label)
@@ -197,10 +201,11 @@ def make_labels(gtmat):
     return gtmat.view(-1)
 
 if __name__ == "__main__":
-    N = 3
-    feat = torch.Tensor([[1,2,3],[3,4,5],[6,7,8]]).cuda()
-    distmat = torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N, N) + \
-                torch.pow(feat, 2).sum(dim=1, keepdim=True).expand(N,N).t()
-    distmat.addmm_(1, -2, feat, feat.t())
-    knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()
-    a = 4
+    feat = np.array([[1,2,3],[3,4,5],[6,7,8]])
+    #feat = feat.cpu().numpy()
+    mean = np.mean(feat,axis=0)
+    std = np.std(feat,axis=0)
+    feat = (feat-mean)/std
+    mean = np.mean(feat,axis=0)
+    std = np.std(feat,axis=0)
+    a = 5
