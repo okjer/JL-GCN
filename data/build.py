@@ -11,14 +11,14 @@ import numpy as np
 import logging
 import time
 
-"""from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader
 from .collate_batch import train_collate_fn, val_collate_fn
 from .datasets import init_dataset, ImageDataset,DADataset
 #from .samplers import RandomIdentitySampler, RandomIdentitySampler_alignedreid  # New add by gu
 from .transforms import build_transforms
 from gcn_clustering import Feeder,gcn,AverageMeter
 from scipy.spatial.distance import cdist
-from sklearn.metrics import precision_score, recall_score"""
+from sklearn.metrics import precision_score, recall_score
 
 
 
