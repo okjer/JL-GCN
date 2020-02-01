@@ -107,11 +107,11 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         
         mean = np.mean(feat,axis=0)
         std = np.std(feat,axis=0)
-        logger.info("before normalize mean={0},std={1}".format(torch.mean(mean),torch.mean(std)))
+        logger.info("before normalize mean={0},std={1}".format(np.mean(mean),np.mean(std)))
         feat = (feat-mean)/std
         mean = np.mean(feat,axis=0)
         std = np.std(feat,axis=0)
-        logger.info("after normalize mean={0},std={1}".format(torch.mean(mean),torch.mean(std)))
+        logger.info("after normalize mean={0},std={1}".format(np.mean(mean),np.mean(std)))
         np.save(feat_path,feat)
         np.save(knn_graph_path,knn_graph)
         np.save(label_path,label)
