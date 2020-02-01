@@ -90,7 +90,6 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
                 outputs = model(imgs)
                 feat.extend(outputs)
                 label.extend(pids.numpy())
-                print(i)
         label = np.array(label)
         N = len(feat)
         D = feat[0].size()[0]
