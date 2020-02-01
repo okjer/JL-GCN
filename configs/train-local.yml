@@ -1,6 +1,6 @@
 MODEL:
   PRETRAIN_CHOICE: 'self'
-  PRETRAIN_PATH: '‪C:\Users\86180\.cache\torch\checkpoints\resnet50-19c8e357.pth'
+  PRETRAIN_PATH: 'D:\download\chromedownload\resnet50.pth' #'‪C:\Users\86180\.cache\torch\checkpoints\resnet50-19c8e357.pth'
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'

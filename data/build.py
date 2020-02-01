@@ -71,6 +71,7 @@ def make_data_loader(cfg):
     return src_train_loader, src_val_loader, src_num_query, src_num_classes,tar_train_loader,tar_val_loader,daDataset
 
 def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
+    logger = logging.getLogger("reid_baseline.train")
     lr = 1e-4
     feat_path = osp.join(cfg.OUTPUT_DIR,'feat.npy')
     knn_graph_path = osp.join(cfg.OUTPUT_DIR,'knn_graph.npy')
@@ -103,9 +104,14 @@ def make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet):
         knn_graph = torch.argsort(distmat,dim = 1,descending=False).cpu().numpy()[:,:k_at_hop[0]+1]
         feat = feat.cpu().numpy()
         #标准化
+        
         mean = np.mean(feat,axis=0)
         std = np.std(feat,axis=0)
+        logger.info("before normalize mean={0},std={1}".format(mean,std))
         feat = (feat-mean)/std
+        mean = np.mean(feat,axis=0)
+        std = np.std(feat,axis=0)
+        logger.info("after normalize mean={0},std={1}".format(mean,std))
         np.save(feat_path,feat)
         np.save(knn_graph_path,knn_graph)
         np.save(label_path,label)
