@@ -13,7 +13,7 @@ import numpy as np
 from torch.backends import cudnn
 sys.path.append('.')
 from config import cfg
-from data import make_data_loader,make_gcn_trainset
+from data import make_data_loader,make_gcn_trainset,make_data_loader2
 from engine.trainer import do_train, do_train_with_center
 from modeling import build_model
 from layers import make_loss, make_loss_with_center
@@ -26,11 +26,15 @@ def train(cfg):
     torch.manual_seed(0)
     np.random.seed(0)
     # prepare dataset
-    src_train_loader,src_val_loader,src_num_query,src_num_classes,tar_train_loader,tar_val_loader,DAdataSet = make_data_loader(cfg)
+    train_loader,num_classes = make_data_loader2(cfg)
+    #src_train_loader,src_val_loader,src_num_query,src_num_classes,tar_train_loader,tar_val_loader,DAdataSet = make_data_loader(cfg)
     #
     # prepare model
-    model = build_model(cfg, src_num_classes)
-    train_set = make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet)
+    tar_train_loader = DAdataSet = None
+    model = build_model(cfg, num_classes)
+    train_set = make_gcn_trainset(cfg,model,train_loader,tar_train_loader,DAdataSet)
+    #model = build_model(cfg, src_num_classes)
+    #train_set = make_gcn_trainset(cfg,model,src_train_loader,tar_train_loader,DAdataSet)
 
 
     #1756_c2_f0148737.jpg

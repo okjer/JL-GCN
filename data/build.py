@@ -21,6 +21,29 @@ from scipy.spatial.distance import cdist
 from sklearn.metrics import precision_score, recall_score
 
 
+def make_data_loader2(cfg):
+    torch.manual_seed(0)
+    train_transforms = build_transforms(cfg, is_train=True)
+    num_workers = cfg.DATALOADER.NUM_WORKERS
+
+    dataset = init_dataset('CASIA', root='D:\download\IDM download\Compressed\CASIA-WebFace')#CASIA
+
+    # 源数据集
+    num_classes = dataset.num_train_ids
+    train_set = ImageDataset(dataset.train,dataset.images_dir,train_transforms)
+    train_loader = DataLoader(
+        train_set, batch_size=cfg.SOLVER.IMS_PER_BATCH, shuffle=True, num_workers=num_workers,
+        collate_fn=train_collate_fn
+    )
+    """
+    train_loader = DataLoader(
+        train_set, batch_size=cfg.SOLVER.IMS_PER_BATCH,
+        # sampler=RandomIdentitySampler(dataset.train, cfg.SOLVER.IMS_PER_BATCH, cfg.DATALOADER.NUM_INSTANCE),
+        # sampler=RandomIdentitySampler_alignedreid(dataset.train, cfg.DATALOADER.NUM_INSTANCE),      # new add by gu
+        num_workers=num_workers, collate_fn=train_collate_fn
+    )"""
+    return train_loader,num_classes
+
 
 
 def make_data_loader(cfg):
